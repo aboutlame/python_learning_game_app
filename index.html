@@ -546,11 +546,11 @@
           description: "Основы работы с данными",
           image: "4.jpg",
           theory: `*Уровень 1: Переменные и типы данных*\n\n🔹Переменные — ярлыки для хранения значений:\n\`\`\`python
-      x = 5 
+      x = 5
       name = 'Mario'\n\`\`\`\n\n🔹Функция print() — вывод на экран:\n\`\`\`python
       x = 10
       print(x) # выведется 10\n\`\`\`\n\n🔹Арифметика: +, -, *, /, //, %, **\n\`\`\`python
-      print(5 ** 2)  # 25
+      print(5 ** 2)  # 25 - возведение в степень
       print(10 // 3)  # 3 - целочисленное деление
       print(10 % 3)  # 1 - остаток от деления\n\`\`\`\n\n🔹Изменение переменных:\n\`\`\`python
       n = 5
@@ -565,8 +565,8 @@
               explanation: "Простое присваивание числа в переменную.",
             },
             {
-              code: "name = 'Mario'\nprint(name)",
-              answer: "Mario",
+              code: "name = 'Pytik'\nprint(name)",
+              answer: "Pytik",
               explanation: "Вывод строки из переменной.",
             },
             {
@@ -612,17 +612,36 @@
           ],
         },
         2: {
-          title: "Условный оператор if",
+          title: "Условный оператор if - else",
           description: "Логические ветвления",
           image: "5.jpg",
           theory: `*Уровень 2: Условный оператор if*\n\n🔹Базовый синтаксис:\n\`\`\`python
       if условие:
-        действие\n\`\`\`\n\n🔹Пример:\n\`\`\`python
+        действие
+      else:
+        действие
+        \n\`\`\`\n\n🔹Пример:\n\`\`\`python
       age = 18
       if age >= 18:
-          print("Доступ разрешен")\n\`\`\`\n\n🔹Операторы сравнения:\n>, <, >=, <=, ==, !=\n\n\n🔹Логические операторы:\nand, or, not\n\n\`\`\`python
-      if x > 0 and x < 10:
-          print("Число от 1 до 9")\n\`\`\``,
+        print("Доступ разрешен")
+      else:
+        print("Доступ запрещен")
+      # Доступ разрешен
+          \n\`\`\`\n\n🔹Операторы сравнения:\n>, <, >=, <=, ==, !=\n\`\`\`python
+      x = 5
+      y = 10
+
+      print(x == y)   # False
+      print(x != y)   # True
+      print(x > y)    # False
+          \`\`\`\n\n🔹Логические операторы:\nand, or, not\n\n\`\`\`python
+      age = 15
+      health = 50000
+      if age >= 14 and health > 30000:
+        print("Пайтик прошел!")  # Пайтик прошел!
+      if age == 14 or health == 40000:
+        print("Пайтик прошел!")  # Ничего не выведется
+        \n\`\`\``,
           tasks: [
             {
               code: "x = 5\nif x > 3:\n    print('Да')",
@@ -630,22 +649,22 @@
               explanation: "Простейшее условие.",
             },
             {
-              code: "age = 17\nif age >= 18:\n    print('Вход')\nelse:\n    print('Запрещено')",
-              answer: "Запрещено",
-              explanation: "Проверка возраста.",
+              code: "x = 8\nif x > 5 and x < 10:\n    print('В диапазоне')",
+              answer: "В диапазоне",
+              explanation: "Проверка двух условий через `and`.",
             },
             {
-              code: "a = 10\nb = 5\nif a > b:\n    print(a)\nelse:\n    print(b)",
-              answer: "10",
-              explanation: "Выбор большего числа.",
+              code: "flag = False\nif not flag:\n    print('Пайтик')",
+              answer: "Пайтик",
+              explanation: "Логическое отрицание.",
             },
             {
-              code: "x = 7\nif x % 2 == 0:\n    print('Четное')\nelse:\n    print('Нечетное')",
-              answer: "Нечетное",
-              explanation: "Проверка четности.",
+              code: "role = 'pytik'\nif role == 'pytik' or role == 'python':\n    print('Класс!')",
+              answer: "Класс!",
+              explanation: "Условие не выполнится, так как роль 'guest'.",
             },
             {
-              code: "temp = 25\nif temp > 30:\n    print('Жарко')\nelif temp > 20:\n    print('Тепло')\nelse:\n    print('Холодно')",
+              code: "temp = 25\nif temp >= 25:\n    print('Тепло')\nelse:\n    print('Холодно')",
               answer: "Тепло",
               explanation: "Несколько условий.",
             },
@@ -660,7 +679,7 @@
               explanation: "Логическое ИЛИ.",
             },
             {
-              code: "x = 15\nif not x < 10:\n    print('Больше 10')",
+              code: "x = 15\nif not x < 10:\n    print('Больше 10')\nelse:\n    print('Меньше 10')",
               answer: "Больше 10",
               explanation: "Логическое НЕ.",
             },
@@ -670,17 +689,17 @@
               explanation: "Проверка равенства.",
             },
             {
-              code: "password = 'qwerty123'\nif len(password) >= 8:\n    print('Надежный')\nelse:\n    print('Слишком короткий')",
-              answer: "Надежный",
-              explanation: "Проверка длины строки.",
+              code: "a = 3\nb = 2\nif a**b >= 20 or a % b == 1:\n    print('Py')\nelse:\n    print('Tik')",
+              answer: "Py",
+              explanation: "3 % 2 == 1.",
             },
           ],
         },
         3: {
-          title: "Каскадный оператор elif, else",
+          title: "Каскадный оператор elif",
           description: "Множественные условия",
           image: "6.jpg",
-          theory: `*Уровень 3: Каскадный оператор elif, else*\n\n🔹Множественные условия:\n\`\`\`python
+          theory: `*Уровень 3: Каскадный оператор elif*\n\n🔹Множественные условия:\n\`\`\`python
       if условие1:
           действие1
       elif условие2:
@@ -695,11 +714,14 @@
       elif grade >= 70:
           print('C')
       else:
-          print('D')\n\`\`\`\n\n🔹Порядок проверки: условия проверяются сверху вниз, выполняется только первый подходящий блок.\n\n🔹Else без elif:\n\`\`\`python
+          print('D')
+      # выведется B\n\`\`\`\n\n🔹Порядок проверки: условия проверяются сверху вниз, выполняется только первый подходящий блок.\n\n🔹Else без elif:\n\`\`\`python
+      x = 2
       if x > 0:
           print('+')
       else:
-          print('-')\n\`\`\``,
+          print('-')
+      # выведется +\n\`\`\``,
           tasks: [
             {
               code: "x = 0\nif x > 0:\n    print('+')\nelif x < 0:\n    print('-')\nelse:\n    print('0')",
@@ -717,9 +739,9 @@
               explanation: "Оценки по баллам.",
             },
             {
-              code: "num = 15\nif num % 3 == 0 and num % 5 == 0:\n    print('FizzBuzz')\nelif num % 3 == 0:\n    print('Fizz')\nelif num % 5 == 0:\n    print('Buzz')\nelse:\n    print(num)",
-              answer: "FizzBuzz",
-              explanation: "Классическая задача FizzBuzz.",
+              code: "num = 15\nif num % 3 == 0 and num % 5 == 0:\n    print('Pytik')\nelif num % 3 == 0:\n    print('Py')\nelif num % 5 == 0:\n    print('Tik')\nelse:\n    print(num)",
+              answer: "Pytik",
+              explanation: "Классическая задача Pytik.",
             },
             {
               code: "day = 3\nif day == 1:\n    print('Понедельник')\nelif day == 2:\n    print('Вторник')\nelif day == 3:\n    print('Среда')\nelif day == 4:\n    print('Четверг')\nelif day == 5:\n    print('Пятница')\nelse:\n    print('Выходной')",
@@ -742,9 +764,9 @@
               explanation: "Проверка високосного года.",
             },
             {
-              code: "x = 15\nif x < 10:\n    print('Меньше 10')\nelif x < 20:\n    print('Меньше 20')\nelif x < 30:\n    print('Меньше 30')\nelse:\n    print('30 или больше')",
-              answer: "Меньше 20",
-              explanation: "Проверка диапазонов.",
+              code: "x = 15\nif x < 15 and x > 5:\n    print('P')\nelif x < 20 or x > 16:\n    print('Y')\nelif x < 20 and x > 15:\n    print('T')\nelif x != 15:\n    print('I')\nelse:\n    print('K')",
+              answer: "Y",
+              explanation: "Проверка условий.",
             },
             {
               code: "a = 5\nb = 10\nc = 15\nif a > b and a > c:\n    print(a)\nelif b > a and b > c:\n    print(b)\nelse:\n    print(c)",
@@ -762,12 +784,13 @@
           действия\n\`\`\`\n\n🔹Функция range():\n\`\`\`python
       for i in range(5):     # 0,1,2,3,4
       for i in range(1,6):   # 1,2,3,4,5
-      for i in range(0,10,2): # 0,2,4,6,8\n\`\`\`\n\n🔹Итерация по строке:\n\`\`\`python
-      for char in 'Hello':
-          print(char)\n\`\`\`\n\n🔹Вложенные циклы:\n\`\`\`python
+      for i in range(0,10,2): # 0,2,4,6,8
+      for i in range(10,5,-1): # 10,9,8,7,6\n\`\`\`\n\n🔹Итерация по строке:\n\`\`\`python
+      for i in 'Pytik':
+          print(i) # P  y  t  i  k\`\`\`\n\n🔹Вложенные циклы:\n\`\`\`python
       for i in range(3):
           for j in range(2):
-              print(i, j)\n\`\`\``,
+              print(i, j) # 0 0  0 1  1 0  1 1  2 0  2 1\n\`\`\``,
           tasks: [
             {
               code: "for i in range(3):\n    print(i)",
@@ -785,9 +808,9 @@
               explanation: "Итерация по строке.",
             },
             {
-              code: "total = 0\nfor num in [1, 2, 3, 4]:\n    total += num\nprint(total)",
+              code: "total = 0\nfor num in range(5):\n    total += num\nprint(total)",
               answer: "10",
-              explanation: "Сумма элементов списка.",
+              explanation: "Сумма элементов.",
             },
             {
               code: "for i in range(3, 0, -1):\n    print(i)",
@@ -795,8 +818,8 @@
               explanation: "Обратный цикл.",
             },
             {
-              code: "word = ''\nfor ch in ['p', 'y', 't', 'h', 'o', 'n']:\n    word += ch\nprint(word)",
-              answer: "python",
+              code: "word = ''\nfor ch in ['p', 'y', 't', 'i', 'k']:\n    word += ch\nprint(word)",
+              answer: "pytik",
               explanation: "Сборка строки из списка.",
             },
             {
@@ -815,9 +838,9 @@
               explanation: "Факториал числа.",
             },
             {
-              code: "squares = []\nfor x in range(1, 4):\n    squares.append(x ** 2)\nprint(squares)",
-              answer: "[1, 4, 9]",
-              explanation: "Создание списка квадратов.",
+              code: "for x in 'Pytik':\n    if x == 'i':\n        print('1')\n    else:\n        print('0')",
+              answer: "0 0 0 1 0",
+              explanation: "Цикл с проверкой.",
             },
           ],
         },
@@ -831,7 +854,7 @@
       count = 0
       while count < 5:
           print(count)
-          count += 1\n\`\`\`\n\n🔹Бесконечный цикл:\n\`\`\`python
+          count += 1\n      # count станет равным 4 после цикла\`\`\`\n\n🔹Бесконечный цикл:\n\`\`\`python
       while True:
           print('Бесконечность')
           break  # для остановки\n\`\`\`\n\n🔹Break и continue:\n\`\`\`python
@@ -947,22 +970,12 @@
             {
               code: "for i in range(1, 4):\n    line = ''\n    for j in range(i):\n        line += '*' + ' '\n    print(line)",
               answer: "* \n* * \n* * * ",
-              explanation: "Рисование треугольника.",
+              explanation: "Звёздочки.",
             },
             {
               code: "count = 0\nfor i in range(3):\n    for j in range(3):\n        if (i + j) % 2 == 0:\n            count += 1\nprint(count)",
               answer: "5",
               explanation: "Подсчет пар с четной суммой.",
-            },
-            {
-              code: "result = []\nfor i in range(2):\n    inner = []\n    for j in range(3):\n        inner.append(j)\n    result.append(inner)\nprint(result)",
-              answer: "[[0, 1, 2], [0, 1, 2]]",
-              explanation: "Создание вложенных списков.",
-            },
-            {
-              code: "for i in range(5):\n    for j in range(5):\n        if i + j > 3:\n            print('*', end='')\n        else:\n            print('.', end='')\n    print()",
-              answer: ".....\n.....\n....*\n..***\n*****",
-              explanation: "Паттерн с условием.",
             },
             {
               code: "sum = 0\nfor i in range(3):\n    for j in range(3):\n        for k in range(2):\n            sum += 1\nprint(sum)",
@@ -981,7 +994,10 @@
       print(s[-1]) # 'n'\n\`\`\`\n\n🔹Срезы:\n\`\`\`python
       print(s[1:4]) # 'yth'
       print(s[:3])  # 'Pyt'
+      print(s[::2])  # 'Pto'
       print(s[3:])  # 'hon'\n\`\`\`\n\n🔹Методы строк:\n\`\`\`python
+      print(len('Pytik'))    # 5
+      print('PYYTTTIK'.count('Y'))    # 2
       print(s.upper())    # 'PYTHON'
       print('HELLO'.lower()) # 'hello'
       print('abc'.replace('b', 'x')) # 'axc'
@@ -1010,9 +1026,19 @@
               explanation: "Преобразование в верхний регистр.",
             },
             {
-              code: "print('HELLO'.lower())",
-              answer: "hello",
+              code: "print('PYTIK'.lower())",
+              answer: "pytik",
               explanation: "Преобразование в нижний регистр.",
+            },
+            {
+              code: "s = 'PytikPytik'\nprint(len(s))",
+              answer: "10",
+              explanation: "Длина строки.",
+            },
+            {
+              code: "print('PyytikPPPytIkpYITIK'.count('P'))",
+              answer: "4",
+              explanation: "Количество символов в строке.",
             },
             {
               code: "s = 'abc'\nprint(s.replace('b', 'x'))",
@@ -1020,19 +1046,9 @@
               explanation: "Замена символа в строке.",
             },
             {
-              code: "print('a,b,c'.split(','))",
-              answer: "['a', 'b', 'c']",
-              explanation: "Разделение строки по разделителю.",
-            },
-            {
               code: "name = 'Alice'\nage = 25\nprint(f'{name} is {age} years old')",
               answer: "Alice is 25 years old",
               explanation: "f-строки (форматирование).",
-            },
-            {
-              code: "s = ' hello '\nprint(s.strip())",
-              answer: "hello",
-              explanation: "Удаление пробелов с обеих сторон.",
             },
             {
               code: "s = 'Python'\nprint(s[::-1])",
@@ -1054,8 +1070,14 @@
       nums.remove(2)      # [1,5,3,4]
       nums.pop()          # [1,5,3]\n\`\`\`\n\n🔹Срезы списков:\n\`\`\`python
       print(nums[1:3])    # [5,3]
-      print(nums[::-1])   # [3,5,1]\n\`\`\`\n\n🔹Списочные выражения:\n\`\`\`python
-      squares = [x**2 for x in range(5)] # [0,1,4,9,16]\n\`\`\``,
+      print(nums[::-1])   # [3,5,1]\n\`\`\`\n\n🔹Длина списка (как и у строки):\n\`\`\`python
+      spisok = [0,1,4,9,16,21,22]
+      print(len(spisok)) # 7\n\`\`\`
+      \n\n🔹Что могут списки:\n\`\`\`python
+      spisok = [0,1,4,2,16,2,22]
+      print(max(spisok)) # 22 - максимальный элемент
+      print(min(spisok)) # 0 - минимальный элемент
+      print(sum(spisok)) # 47 - сумма элементов\n\`\`\``,
           tasks: [
             {
               code: "nums = [1, 2, 3]\nprint(nums[1])",
@@ -1063,49 +1085,50 @@
               explanation: "Доступ к элементу списка.",
             },
             {
-              code: "nums = [1, 2, 3]\nnums.append(4)\nprint(nums)",
-              answer: "[1, 2, 3, 4]",
-              explanation: "Добавление элемента в конец.",
+              code: "nums = [1, 2, 3]\nnums.append(4)\nprint(max(nums))",
+              answer: "4",
+              explanation: "Добавление элемента в конец и вывод максимального.",
             },
             {
-              code: "nums = [1, 2, 3]\nnums.insert(1, 5)\nprint(nums)",
-              answer: "[1, 5, 2, 3]",
-              explanation: "Вставка элемента по индексу.",
+              code: "nums = [1, 2, 3]\nnums.insert(1, 5)\nprint(len(nums))",
+              answer: "4",
+              explanation: "Вставка элемента по индексу и вывод длины.",
             },
             {
-              code: "nums = [1, 2, 3, 2]\nnums.remove(2)\nprint(nums)",
-              answer: "[1, 3, 2]",
-              explanation: "Удаление первого вхождения.",
+              code: "nums = [1, 2, 3, 2, 5]\nprint(max(nums)-min(nums))",
+              answer: "4",
+              explanation: "Разность максимального и минимального.",
             },
             {
-              code: "nums = [1, 2, 3]\nprint(nums.pop())\nprint(nums)",
-              answer: "3\n[1, 2]",
-              explanation: "Удаление и возврат последнего элемента.",
+              code: "nums = [1, 2, 3]\nprint(sum(nums)*max(nums))",
+              answer: "18",
+              explanation: "Умножение суммы и максимального.",
             },
             {
-              code: "nums = [1, 2, 3, 4, 5]\nprint(nums[1:4])",
-              answer: "[2, 3, 4]",
+              code: "nums = [1, 2, 3, 4, 5]\nprint(len(nums[1:4]))",
+              answer: "3",
               explanation: "Срез списка.",
             },
             {
-              code: "nums = [1, 2, 3]\nprint(nums[::-1])",
-              answer: "[3, 2, 1]",
-              explanation: "Разворот списка срезом.",
+              code: "nums = [1, 2, 3, 4, 5]\ncount = 0\nfor num in nums[::-1]:\n    print(num)",
+              answer: "5 4 3 2 1",
+              explanation: "Разворот списка.",
             },
             {
-              code: "squares = [x**2 for x in range(4)]\nprint(squares)",
-              answer: "[0, 1, 4, 9]",
+              code: "squares = [x**2 for x in range(4)]\nprint(sum(squares))",
+              answer: "14",
               explanation: "Списочное выражение.",
             },
             {
-              code: "nums = [1, 2, 3]\nnums[1] = 5\nprint(nums)",
-              answer: "[1, 5, 3]",
-              explanation: "Изменение элемента списка.",
+              code: "a = [1, 2]\nb = [3, 4, 5]\nprint(len(a + b))",
+              answer: "5",
+              explanation: "Конкатенация списков.",
             },
             {
-              code: "a = [1, 2]\nb = [3, 4]\nprint(a + b)",
-              answer: "[1, 2, 3, 4]",
-              explanation: "Конкатенация списков.",
+              code: "nums = [1, 2, 3, 4, 5]\nresult = 1\nfor i in range(len(nums)):\n    if i % 2 != 0:\n        result *= nums[i]\nprint(result)",
+              answer: "8",
+              explanation:
+                "Произведение элементов списка с нечётными индексами (2 * 4 = 8).",
             },
           ],
         },
@@ -1115,12 +1138,11 @@
           image: "12.jpg",
           theory: `*Уровень 9: Функции*\n\n🔹Определение функции:\n\`\`\`python
       def greet(name):
-          return f'Hello, {name}!'\n\`\`\`\n\n🔹Вызов функции:\n\`\`\`python
-      print(greet('Alice')) # 'Hello, Alice!'\n\`\`\`\n\n🔹Параметры по умолчанию:\n\`\`\`python
-      def power(x, n=2):
-          return x ** n
-      print(power(3))   # 9
-      print(power(3,3)) # 27\n\`\`\`\n\n🔹Рекурсия:\n\`\`\`python
+          return name*2'\n\`\`\`\n\n🔹Вызов функции:\n\`\`\`python
+      print(greet('Pytik')) # 'PytikPytik'\n\`\`\`\n\n🔹Функция с параметрами:\n\`\`\`python
+      def multiply(a, b):
+          return a * b
+      print(multiply(3, 4)) # 12\`\`\`\n\n🔹Рекурсия:\n\`\`\`python
       def factorial(n):
           return 1 if n == 0 else n * factorial(n-1)
       print(factorial(5)) # 120\n\`\`\``,
@@ -1131,9 +1153,9 @@
               explanation: "Простая функция сложения.",
             },
             {
-              code: "def greet(name='Guest'):\n    return f'Hello, {name}!'\nprint(greet())",
-              answer: "Hello, Guest!",
-              explanation: "Параметр по умолчанию.",
+              code: "def greet(name):\n    return f'Hello, {name}!'\nprint(greet('Pytik'))",
+              answer: "Hello, Pytik!",
+              explanation: "Параметр - строка.",
             },
             {
               code: "def square(x):\n    return x * x\nprint(square(4))",
@@ -1185,104 +1207,144 @@
           theory: "Босс-уровень!\n\nПроверь свои знания по всем темам.",
           tasks: [
             {
-              code: "x = 10\ny = 3\nprint(x // y, x % y)",
-              answer: "3 1",
+              code: "x = 5\ny = 3\nprint(x ** y - y ** x)",
+              answer: "-118",
               explanation: "Арифметические операции",
             },
             {
-              code: "s = 'Python'\nprint(s[1] + s[-2:])",
-              answer: "yon",
-              explanation: "Индексация строк",
+              code: "s = 'hello'\nres = ''\nfor i in range(len(s)):\n    if i % 2 == 0:\n        res += s[i]\nprint(res)",
+              answer: "hlo",
+              explanation: "Циклы + строки",
             },
             {
-              code: "nums = [1, 2, 3]\nnums.append(nums[0] * 2)\nprint(nums)",
-              answer: "[1, 2, 3, 2]",
-              explanation: "Работа со списками",
+              code: "nums = [1, 2, 3, 4]\nsum = 0\nfor num in nums:\n    if num % 2 == 1:\n        sum += num\nprint(sum)",
+              answer: "4",
+              explanation: "Списки + условия",
             },
             {
-              code: "for i in range(2, 5):\n    print(i * 2, end=' ')",
-              answer: "4 6 8",
-              explanation: "Цикл for с range",
+              code: "def double(x):\n    return x * 2\nprint(double(5) + double(3))",
+              answer: "16",
+              explanation: "Функции",
             },
             {
-              code: "def greet(name):\n    return f'Hello, {name}!'\nprint(greet('Alice'))",
-              answer: "Hello, Alice!",
-              explanation: "Простые функции",
+              code: "a = 10\nb = 5\nif a > b:\n    a, b = b, a\nprint(a, b)",
+              answer: "5 10",
+              explanation: "Условия + обмен значений",
             },
             {
-              code: "x = 15\nif x % 2 == 0:\n    print('Even')\nelse:\n    print('Odd')\nprint('Done')",
-              answer: "Odd\nDone",
-              explanation: "Условия + вывод",
+              code: "text = 'abcde'\ncount = 0\nfor ch in text:\n    if ch == 'a' or ch == 'e':\n        count += 1\nprint(count)",
+              answer: "2",
+              explanation: "Строки + подсчёт",
             },
             {
-              code: "s = 'hello'\nprint(s.upper()[1:4])",
-              answer: "ELL",
-              explanation: "Методы строк + срезы",
+              code: "total = 0\nfor i in range(1, 6):\n    total += i * i\nprint(total)",
+              answer: "55",
+              explanation: "Циклы + математика",
             },
             {
-              code: "count = 0\nwhile count < 3:\n    print(count * 2)\n    count += 1",
-              answer: "0\n2\n4",
-              explanation: "Цикл while",
-            },
-            {
-              code: "def max_num(a, b):\n    return a if a > b else b\nprint(max_num(7, max_num(3, 5)))",
+              code: "def max_num(a, b):\n    if a > b:\n        return a\n    return b\nprint(max_num(7, max_num(3, 5)))",
               answer: "7",
-              explanation: "Функции с условиями",
+              explanation: "Вложенные функции",
             },
             {
-              code: "words = ['apple', 'banana', 'cherry']\nprint([len(word) for word in words])",
-              answer: "[5, 6, 6]",
-              explanation: "Списковые выражения",
+              code: "numbers = [3, 1, 4, 1, 5]\nm = numbers[0]\nfor num in numbers:\n    if num > m:\n        m = num\nprint(m)",
+              answer: "5",
+              explanation: "Поиск максимума",
             },
             {
-              code: "s = 'abc123'\ndigits = 0\nfor ch in s:\n    if ch.isdigit():\n        digits += 1\nprint(digits)",
-              answer: "3",
-              explanation: "Цикл + строковые методы",
-            },
-            {
-              code: "def is_palindrome(s):\n    return s == s[::-1]\nprint(is_palindrome('racecar'))",
-              answer: "True",
-              explanation: "Функции + срезы строк",
-            },
-            {
-              code: "nums = [1, 5, 3, 8, 2]\nresult = 0\nfor num in nums:\n    if num > 4:\n        result += num\nprint(result)",
-              answer: "13",
-              explanation: "Цикл + условие + списки",
-            },
-            {
-              code: "def count_vowels(s):\n    vowels = 'aeiou'\n    return sum(1 for ch in s if ch in vowels)\nprint(count_vowels('Programming'))",
-              answer: "3",
-              explanation: "Функции + генераторы",
-            },
-            {
-              code: "x = 5\ny = 3\nz = 7\nif x > y and y < z:\n    print('Yes')\nif not x == z:\n    print('No')",
-              answer: "Yes\nNo",
-              explanation: "Сложные условия",
-            },
-            {
-              code: "def sum_even(numbers):\n    return sum(num for num in numbers if num % 2 == 0)\nprint(sum_even([1, 2, 3, 4, 5, 6]))",
-              answer: "12",
-              explanation: "Функции + генераторы + условия",
-            },
-            {
-              code: "s = 'HelloWorld'\nresult = ''\nfor i in range(len(s)):\n    if i % 2 == 0:\n        result += s[i].upper()\n    else:\n        result += s[i].lower()\nprint(result)",
-              answer: "HeLlOwOrLd",
-              explanation: "Цикл + строки + условия",
-            },
-            {
-              code: "def factorial(n):\n    result = 1\n    for i in range(1, n+1):\n        result *= i\n    return result\nprint(factorial(5))",
-              answer: "120",
+              code: "def factorial(n):\n    res = 1\n    for i in range(1, n+1):\n        res *= i\n    return res\nprint(factorial(4))",
+              answer: "24",
               explanation: "Функции + циклы",
             },
             {
-              code: "numbers = [3, 1, 4, 1, 5, 9]\nfor i in range(len(numbers)):\n    if numbers[i] == max(numbers):\n        print(f'Max at {i}')\n        break",
-              answer: "Max at 5",
-              explanation: "Цикл + списки + break",
+              code: "x = 5\nwhile x > 0:\n    print(x)\n    x -= 2",
+              answer: "5\n3\n1",
+              explanation: "Цикл while",
             },
             {
-              code: "def process_string(s):\n    s = s.strip().lower()\n    return s if len(s) > 3 else s.upper()\nprint(process_string('  PyTHon  '))\nprint(process_string('hi'))",
-              answer: "python\nHI",
-              explanation: "Функции + строковые методы + условия",
+              code: "words = ['apple', 'banana', 'cherry']\nlongest = ''\nfor word in words:\n    if len(word) > len(longest):\n        longest = word\nprint(longest)",
+              answer: "banana",
+              explanation: "Списки строк",
+            },
+            {
+              code: "def is_even(n):\n    return n % 2 == 0\nprint(is_even(4), is_even(5))",
+              answer: "True False",
+              explanation: "Логические функции",
+            },
+            {
+              code: "s = 'hello'\nnew_s = ''\nfor ch in s:\n    new_s = ch + new_s\nprint(new_s)",
+              answer: "olleh",
+              explanation: "Разворот строки",
+            },
+            {
+              code: "def power(a, b):\n    res = 1\n    for _ in range(b):\n        res *= a\n    return res\nprint(power(2, 5))",
+              answer: "32",
+              explanation: "Возведение в степень",
+            },
+            {
+              code: "nums = [1, 2, 3, 4, 5]\nfor i in range(len(nums)):\n    nums[i] *= 2\nprint(nums[2])",
+              answer: "6",
+              explanation: "Изменение списка",
+            },
+            {
+              code: "total = 0\nn = 10\nwhile n > 0:\n    if n % 3 == 0:\n        total += n\n    n -= 1\nprint(total)",
+              answer: "18",
+              explanation: "Сумма кратных чисел",
+            },
+            {
+              code: "def count_chars(s, char):\n    count = 0\n    for ch in s:\n        if ch == char:\n            count += 1\n    return count\nprint(count_chars('hello', 'l'))",
+              answer: "2",
+              explanation: "Подсчёт символов",
+            },
+            {
+              code: "def sum_digits(n):\n    sum = 0\n    while n > 0:\n        sum += n % 10\n        n = n // 10\n    return sum\nprint(sum_digits(1234))",
+              answer: "10",
+              explanation: "Сумма цифр числа",
+            },
+            {
+              code: "def is_prime(n):\n    if n < 2:\n        return False\n    for i in range(2, n):\n        if n % i == 0:\n            return False\n    return True\nprint(is_prime(7), is_prime(8))",
+              answer: "True False",
+              explanation: "Проверка на простое число",
+            },
+            {
+              code: "def reverse_num(n):\n    reversed = 0\n    while n > 0:\n        reversed = reversed * 10 + n % 10\n        n = n // 10\n    return reversed\nprint(reverse_num(123))",
+              answer: "321",
+              explanation: "Переворот числа",
+            },
+            {
+              code: "def count_vowels(s):\n    vowels = 'aeiou'\n    count = 0\n    for ch in s:\n        if ch in vowels:\n            count += 1\n    return count\nprint(count_vowels('hello world'))",
+              answer: "3",
+              explanation: "Подсчёт гласных",
+            },
+            {
+              code: "def multiply_list(nums):\n    res = 1\n    for num in nums:\n        res *= num\n    return res\nprint(multiply_list([1, 2, 3, 4]))",
+              answer: "24",
+              explanation: "Произведение элементов списка",
+            },
+            {
+              code: "def alternating_sum(n):\n    sum = 0\n    sign = 1\n    for i in range(1, n+1):\n        sum += sign * i\n        sign *= -1\n    return sum\nprint(alternating_sum(5))",
+              answer: "3",
+              explanation: "Знакопеременная сумма",
+            },
+            {
+              code: "def print_pattern(n):\n    for i in range(1, n+1):\n        print('*' * i)\nprint_pattern(3)",
+              answer: "*\n**\n***",
+              explanation: "Печать узора",
+            },
+            {
+              code: "def find_min(nums):\n    min_val = nums[0]\n    for num in nums:\n        if num < min_val:\n            min_val = num\n    return min_val\nprint(find_min([5, 2, 8, 1, 9]))",
+              answer: "1",
+              explanation: "Поиск минимума",
+            },
+            {
+              code: "def count_words(s):\n    words = s.split()\n    return len(words)\nprint(count_words('Hello world from Python'))",
+              answer: "4",
+              explanation: "Подсчёт слов",
+            },
+            {
+              code: "def sum_even_squares(n):\n    sum = 0\n    for i in range(1, n+1):\n        if i % 2 == 0:\n            sum += i * i\n    return sum\nprint(sum_even_squares(5))",
+              answer: "20",
+              explanation: "Сумма квадратов чётных",
             },
           ],
         },
