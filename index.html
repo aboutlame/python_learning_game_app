@@ -1,0 +1,1740 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Путь Пайтика</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg-color: #0f0f1b;
+        --primary: #6df7c7;
+        --secondary: #11f3a2;
+        --accent: #ff2d75;
+        --text: #e0e0e0;
+        --border: #3a3a4a;
+        --pixel-size: 4px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Press Start 2P", cursive;
+        background-color: var(--bg-color);
+        color: var(--text);
+        margin: 0;
+        padding: 20px;
+        line-height: 1.6;
+        font-size: 14px;
+      }
+
+      #app {
+        max-width: 1200px;
+        margin: 0 auto;
+        border: var(--pixel-size) solid var(--border);
+        box-shadow: 0 0 0 var(--pixel-size) var(--primary),
+          0 0 0 calc(var(--pixel-size) * 2) var(--accent);
+        padding: 20px;
+        background-color: #1a1a2a;
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 40px;
+        text-shadow: 3px 3px 0 var(--border);
+        padding: 10px;
+      }
+
+      .header h1 {
+        font-size: 24px;
+        color: var(--primary);
+        margin-bottom: 15px;
+      }
+
+      .header p {
+        color: var(--secondary);
+        font-size: 12px;
+        margin: 0;
+      }
+
+      .sections-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 25px;
+        padding: 10px;
+      }
+
+      .section-card {
+        background: #252535;
+        border: var(--pixel-size) solid var(--border);
+        position: relative;
+        transition: all 0.2s;
+        overflow: hidden;
+        cursor: pointer;
+      }
+
+      .section-card:hover {
+        transform: translate(-4px, -4px);
+        box-shadow: 8px 8px 0 var(--accent);
+      }
+
+      .image-container {
+        position: relative;
+        width: 100%;
+        padding-bottom: 66.67%;
+        overflow: hidden;
+      }
+
+      .section-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        border-bottom: var(--pixel-size) solid var(--border);
+        transition: transform 0.3s ease;
+      }
+
+      .section-card:hover .section-image {
+        transform: scale(1.05);
+      }
+
+      .section-content {
+        padding: 15px;
+      }
+
+      .section-title {
+        font-size: 14px;
+        color: var(--primary);
+        margin: 0 0 10px;
+        line-height: 1.4;
+      }
+
+      .section-description {
+        color: var(--text);
+        font-size: 10px;
+        line-height: 1.5;
+        margin-bottom: 15px;
+      }
+
+      .section-number {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        background: var(--accent);
+        color: #fff;
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        border: var(--pixel-size) solid #fff;
+        z-index: 2;
+        /* Убираем старые стили */
+        top: auto;
+        /* Добавляем тень для лучшей читаемости */
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+        /* Скругление углов */
+        border-radius: 50%;
+      }
+
+      .btn {
+        display: inline-block;
+        background: var(--primary);
+        color: #000;
+        border: none;
+        padding: 8px 15px;
+        font-family: "Press Start 2P", cursive;
+        font-size: 10px;
+        cursor: pointer;
+        text-decoration: none;
+        border: var(--pixel-size) solid #000;
+        box-shadow: 4px 4px 0 #000;
+        transition: all 0.1s;
+        margin-top: 10px;
+      }
+
+      .btn:hover {
+        transform: translate(2px, 2px);
+        box-shadow: 2px 2px 0 #000;
+      }
+
+      .btn-secondary {
+        background: var(--border);
+        color: var(--text);
+      }
+
+      .btn-check {
+        background: var(--accent);
+        color: white;
+      }
+
+      .btn-next {
+        background: var(--secondary);
+      }
+
+      .lesson-container {
+        background: #252535;
+        border: var(--pixel-size) solid var(--border);
+        padding: 20px;
+        margin-top: 20px;
+      }
+
+      .lesson-title {
+        color: var(--primary);
+        font-size: 18px;
+        margin-bottom: 15px;
+      }
+
+      .lesson-content {
+        font-size: 12px;
+        line-height: 1.6;
+        margin-bottom: 20px;
+      }
+
+      .lesson-content code {
+        background: #3a3a4a;
+        padding: 10px;
+        display: block;
+        margin: 10px 0;
+        overflow-x: auto;
+        white-space: pre;
+        font-family: monospace;
+        border-left: 4px solid var(--accent);
+      }
+
+      .lesson-content ul {
+        padding-left: 20px;
+        list-style-type: none;
+      }
+
+      .lesson-content li {
+        margin-bottom: 10px;
+        position: relative;
+        padding-left: 15px;
+      }
+
+      .task {
+        background: #3a3a4a;
+        border: var(--pixel-size) solid var(--border);
+        padding: 15px;
+        margin-bottom: 15px;
+      }
+
+      .task-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+
+      .task-title {
+        font-size: 14px;
+        color: var(--primary);
+      }
+
+      .task-question {
+        font-size: 12px;
+        margin-bottom: 10px;
+      }
+
+      .task-code {
+        background: #2a2a3a;
+        padding: 10px;
+        margin: 10px 0;
+        overflow-x: auto;
+        font-family: monospace;
+        white-space: pre;
+        border-radius: 4px;
+      }
+
+      .task-actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 15px;
+      }
+
+      .answer-input {
+        background: #2a2a3a;
+        border: var(--pixel-size) solid var(--border);
+        color: var(--text);
+        font-family: "Press Start 2P", cursive;
+        padding: 8px;
+        width: 100%;
+        margin-top: 10px;
+        font-size: 12px;
+      }
+
+      .answer-result {
+        margin-top: 15px;
+        padding: 10px;
+        border: var(--pixel-size) solid var(--border);
+        background: #3a3a4a;
+        display: none;
+      }
+
+      .answer-correct {
+        border-color: var(--secondary);
+      }
+
+      .answer-incorrect {
+        border-color: var(--accent);
+      }
+
+      .crystals {
+        display: flex;
+        gap: 5px;
+        margin-top: 10px;
+      }
+
+      .progress {
+        margin-top: 15px;
+        font-size: 10px;
+        color: var(--secondary);
+      }
+
+      .nav-buttons {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 15px;
+      }
+
+      .section-card {
+        position: relative;
+        /* Остальные стили остаются прежними */
+      }
+
+      .section-content {
+        position: relative;
+        padding: 15px;
+        padding-bottom: 40px; /* Добавляем место для номера */
+        /* Остальные стили остаются прежними */
+      }
+
+      /* Убираем z-index у изображения если он был */
+      .section-image {
+        z-index: 1;
+      }
+
+      .sections-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 25px;
+        padding: 10px;
+        position: relative;
+      }
+
+      .crystals {
+        display: flex;
+        gap: 4px;
+        margin-top: 10px;
+        image-rendering: pixelated;
+      }
+
+      .crystal {
+        width: 16px;
+        height: 16px;
+        background-color: var(--accent);
+        position: relative;
+        /* Чистый пиксельный ромб */
+        clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+        /* Двойная граница для объема */
+        box-shadow: 0 0 0 1px var(--border), 0 0 0 2px rgba(0, 0, 0, 0.3);
+        transform: rotate(45deg);
+      }
+
+      .crystal.lost {
+        opacity: 0.5;
+        filter: brightness(0.7) saturate(0.5);
+      }
+
+      @keyframes pixelBounce {
+        0% {
+          transform: rotate(45deg) translateY(0);
+        }
+        50% {
+          transform: rotate(45deg) translateY(-3px);
+        }
+        100% {
+          transform: rotate(45deg) translateY(0);
+        }
+      }
+
+      /* Пиксельная граница для кристаллов */
+      .crystal {
+        box-shadow: 0px 0px 0px 1px var(--border), 1px 0px 0px 1px var(--border),
+          0px 1px 0px 1px var(--border), 1px 1px 0px 1px var(--border);
+      }
+
+      .crystal.lost {
+        box-shadow: 0px 0px 0px 1px var(--border), 1px 0px 0px 1px var(--border),
+          0px 1px 0px 1px var(--border), 1px 1px 0px 1px var(--border);
+        filter: brightness(0.5);
+      }
+      .crystal {
+        width: 16px;
+        height: 16px;
+        background-color: var(--accent);
+        position: relative;
+        /* Пиксельная форма кристалла */
+        clip-path: polygon(
+          50% 0%,
+          75% 25%,
+          100% 50%,
+          75% 75%,
+          50% 100%,
+          25% 75%,
+          0% 50%,
+          25% 25%
+        );
+        /* Пиксельная граница */
+        box-shadow: 0px 0px 0px 1px var(--border), 1px 0px 0px 1px var(--border),
+          0px 1px 0px 1px var(--border), 1px 1px 0px 1px var(--border);
+      }
+
+      @keyframes pixelBounce {
+        0% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-4px);
+        }
+        100% {
+          transform: translateY(0);
+        }
+      }
+
+      .crystal.lost {
+        animation: pixelBounce 0.3s steps(2);
+      }
+
+      /* Стили для экрана завершения */
+      .completion-screen {
+        text-align: center;
+        padding: 20px;
+      }
+
+      .completion-image {
+        max-width: 100%;
+        height: auto;
+        border: var(--pixel-size) solid var(--border);
+        margin: 20px auto;
+      }
+
+      .boss-section {
+        max-width: 100%;
+        grid-column: 1 / -1;
+      }
+
+      .boss-completion {
+        background: #1a1a2a;
+        border: var(--pixel-size) solid var(--accent);
+        padding: 20px;
+        margin: 20px auto;
+        max-width: 800px;
+      }
+
+      @media (max-width: 768px) {
+        body {
+          padding: 10px;
+          font-size: 12px;
+        }
+
+        .header h1 {
+          font-size: 18px;
+        }
+
+        .sections-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .image-container {
+          padding-bottom: 75%;
+        }
+        .btn-check {
+          background: var(--accent);
+          color: white;
+          margin-top: 10px;
+          width: 100%;
+        }
+
+        .btn-check:hover {
+          background: #e61a5f;
+        }
+
+        .lesson-content h3 {
+          color: var(--primary);
+          font-size: 14px;
+          margin: 20px 0 10px;
+          border-bottom: 2px solid var(--accent);
+          padding-bottom: 5px;
+        }
+
+        .lesson-content ul {
+          list-style-type: none;
+          padding-left: 20px;
+          margin: 10px 0;
+        }
+
+        .lesson-content li {
+          margin-bottom: 8px;
+          position: relative;
+          padding-left: 25px;
+        }
+
+        .lesson-content li .bullet {
+          color: var(--accent);
+          position: absolute;
+          left: 0;
+          font-weight: bold;
+        }
+
+        .lesson-content pre {
+          background: #2a2a3a;
+          padding: 12px;
+          border-radius: 4px;
+          overflow-x: auto;
+          margin: 15px 0;
+          border-left: 4px solid var(--accent);
+        }
+
+        .lesson-content code {
+          font-family: "Courier New", monospace;
+          font-size: 12px;
+          color: var(--primary);
+        }
+
+        .lesson-content strong {
+          color: var(--primary);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div class="header">
+        <h1>ПУТЬ ПАЙТИКА</h1>
+        <p>10 УРОВНЕЙ ДЛЯ МАСТЕРА КОДА</p>
+      </div>
+
+      <div id="content">
+        <!-- Контент будет загружен здесь -->
+      </div>
+    </div>
+
+    <script>
+      // Полные данные всех 10 разделов
+      const sectionsData = {
+        1: {
+          title: "Переменные и типы данных",
+          description: "Основы работы с данными",
+          image: "4.jpg",
+          theory: `*Уровень 1: Переменные и типы данных*\n\n🔹Переменные — ярлыки для хранения значений:\n\`\`\`python
+      x = 5 
+      name = 'Mario'\n\`\`\`\n\n🔹Функция print() — вывод на экран:\n\`\`\`python
+      x = 10
+      print(x) # выведется 10\n\`\`\`\n\n🔹Арифметика: +, -, *, /, //, %, **\n\`\`\`python
+      print(5 ** 2)  # 25
+      print(10 // 3)  # 3 - целочисленное деление
+      print(10 % 3)  # 1 - остаток от деления\n\`\`\`\n\n🔹Изменение переменных:\n\`\`\`python
+      n = 5
+      n += 3
+      print(n)  # 8\n\`\`\`\n\n🔹Строки (подробнее о них позже!):\n\`\`\`python
+      text = 'Hi'
+      print(text * 3)  # HiHiHi\n\`\`\``,
+          tasks: [
+            {
+              code: "x = 5\nprint(x)",
+              answer: "5",
+              explanation: "Простое присваивание числа в переменную.",
+            },
+            {
+              code: "name = 'Mario'\nprint(name)",
+              answer: "Mario",
+              explanation: "Вывод строки из переменной.",
+            },
+            {
+              code: "x = 2\ny = 3\nprint(x + y)",
+              answer: "5",
+              explanation: "Сложение двух чисел.",
+            },
+            {
+              code: "a = 4\na = a + 6\nprint(a)",
+              answer: "10",
+              explanation: "Изменение значения переменной.",
+            },
+            {
+              code: "n = 2\nn *= 3\nprint(n + 1)",
+              answer: "7",
+              explanation: "Умножение и прибавление.",
+            },
+            {
+              code: "print(10 // 3)",
+              answer: "3",
+              explanation: "Целочисленное деление.",
+            },
+            {
+              code: "print(10 % 3)",
+              answer: "1",
+              explanation: "Остаток от деления.",
+            },
+            {
+              code: "text = 'Hi'\nprint(text * 3)",
+              answer: "HiHiHi",
+              explanation: "Умножение строки.",
+            },
+            {
+              code: "x = 5\ny = 2\nprint(x ** y)",
+              answer: "25",
+              explanation: "Возведение в степень.",
+            },
+            {
+              code: "a = 10\nb = 20\na, b = b, a\nprint(a, b)",
+              answer: "20 10",
+              explanation: "Обмен значений переменных.",
+            },
+          ],
+        },
+        2: {
+          title: "Условный оператор if",
+          description: "Логические ветвления",
+          image: "5.jpg",
+          theory: `*Уровень 2: Условный оператор if*\n\n🔹Базовый синтаксис:\n\`\`\`python
+      if условие:
+        действие\n\`\`\`\n\n🔹Пример:\n\`\`\`python
+      age = 18
+      if age >= 18:
+          print("Доступ разрешен")\n\`\`\`\n\n🔹Операторы сравнения:\n>, <, >=, <=, ==, !=\n\n\n🔹Логические операторы:\nand, or, not\n\n\`\`\`python
+      if x > 0 and x < 10:
+          print("Число от 1 до 9")\n\`\`\``,
+          tasks: [
+            {
+              code: "x = 5\nif x > 3:\n    print('Да')",
+              answer: "Да",
+              explanation: "Простейшее условие.",
+            },
+            {
+              code: "age = 17\nif age >= 18:\n    print('Вход')\nelse:\n    print('Запрещено')",
+              answer: "Запрещено",
+              explanation: "Проверка возраста.",
+            },
+            {
+              code: "a = 10\nb = 5\nif a > b:\n    print(a)\nelse:\n    print(b)",
+              answer: "10",
+              explanation: "Выбор большего числа.",
+            },
+            {
+              code: "x = 7\nif x % 2 == 0:\n    print('Четное')\nelse:\n    print('Нечетное')",
+              answer: "Нечетное",
+              explanation: "Проверка четности.",
+            },
+            {
+              code: "temp = 25\nif temp > 30:\n    print('Жарко')\nelif temp > 20:\n    print('Тепло')\nelse:\n    print('Холодно')",
+              answer: "Тепло",
+              explanation: "Несколько условий.",
+            },
+            {
+              code: "x = 5\ny = 10\nif x > 0 and y > 0:\n    print('Оба положительные')",
+              answer: "Оба положительные",
+              explanation: "Логическое И.",
+            },
+            {
+              code: "name = 'admin'\nif name == 'admin' or name == 'root':\n    print('Доступ разрешен')",
+              answer: "Доступ разрешен",
+              explanation: "Логическое ИЛИ.",
+            },
+            {
+              code: "x = 15\nif not x < 10:\n    print('Больше 10')",
+              answer: "Больше 10",
+              explanation: "Логическое НЕ.",
+            },
+            {
+              code: "a = 3\nb = 3\nif a == b:\n    print('Равны')\nelse:\n    print('Не равны')",
+              answer: "Равны",
+              explanation: "Проверка равенства.",
+            },
+            {
+              code: "password = 'qwerty123'\nif len(password) >= 8:\n    print('Надежный')\nelse:\n    print('Слишком короткий')",
+              answer: "Надежный",
+              explanation: "Проверка длины строки.",
+            },
+          ],
+        },
+        3: {
+          title: "Каскадный оператор elif, else",
+          description: "Множественные условия",
+          image: "6.jpg",
+          theory: `*Уровень 3: Каскадный оператор elif, else*\n\n🔹Множественные условия:\n\`\`\`python
+      if условие1:
+          действие1
+      elif условие2:
+          действие2
+      else:
+          действие3\n\`\`\`\n\n🔹Пример:\n\`\`\`python
+      grade = 85
+      if grade >= 90:
+          print('A')
+      elif grade >= 80:
+          print('B')
+      elif grade >= 70:
+          print('C')
+      else:
+          print('D')\n\`\`\`\n\n🔹Порядок проверки: условия проверяются сверху вниз, выполняется только первый подходящий блок.\n\n🔹Else без elif:\n\`\`\`python
+      if x > 0:
+          print('+')
+      else:
+          print('-')\n\`\`\``,
+          tasks: [
+            {
+              code: "x = 0\nif x > 0:\n    print('+')\nelif x < 0:\n    print('-')\nelse:\n    print('0')",
+              answer: "0",
+              explanation: "Проверка знака числа.",
+            },
+            {
+              code: "age = 25\nif age < 13:\n    print('Ребенок')\nelif age < 18:\n    print('Подросток')\nelif age < 65:\n    print('Взрослый')\nelse:\n    print('Пенсионер')",
+              answer: "Взрослый",
+              explanation: "Возрастные категории.",
+            },
+            {
+              code: "score = 78\nif score >= 90:\n    print('A')\nelif score >= 80:\n    print('B')\nelif score >= 70:\n    print('C')\nelif score >= 60:\n    print('D')\nelse:\n    print('F')",
+              answer: "C",
+              explanation: "Оценки по баллам.",
+            },
+            {
+              code: "num = 15\nif num % 3 == 0 and num % 5 == 0:\n    print('FizzBuzz')\nelif num % 3 == 0:\n    print('Fizz')\nelif num % 5 == 0:\n    print('Buzz')\nelse:\n    print(num)",
+              answer: "FizzBuzz",
+              explanation: "Классическая задача FizzBuzz.",
+            },
+            {
+              code: "day = 3\nif day == 1:\n    print('Понедельник')\nelif day == 2:\n    print('Вторник')\nelif day == 3:\n    print('Среда')\nelif day == 4:\n    print('Четверг')\nelif day == 5:\n    print('Пятница')\nelse:\n    print('Выходной')",
+              answer: "Среда",
+              explanation: "Дни недели.",
+            },
+            {
+              code: "x = 10\ny = 20\nif x > y:\n    print('x больше')\nelif x < y:\n    print('y больше')\nelse:\n    print('Равны')",
+              answer: "y больше",
+              explanation: "Сравнение двух чисел.",
+            },
+            {
+              code: "temp = -5\nif temp > 30:\n    print('Жарко')\nelif temp > 20:\n    print('Тепло')\nelif temp > 10:\n    print('Прохладно')\nelif temp > 0:\n    print('Холодно')\nelse:\n    print('Мороз')",
+              answer: "Мороз",
+              explanation: "Погодные условия.",
+            },
+            {
+              code: "year = 2020\nif year % 400 == 0:\n    print('Високосный')\nelif year % 100 == 0:\n    print('Не високосный')\nelif year % 4 == 0:\n    print('Високосный')\nelse:\n    print('Не високосный')",
+              answer: "Високосный",
+              explanation: "Проверка високосного года.",
+            },
+            {
+              code: "x = 15\nif x < 10:\n    print('Меньше 10')\nelif x < 20:\n    print('Меньше 20')\nelif x < 30:\n    print('Меньше 30')\nelse:\n    print('30 или больше')",
+              answer: "Меньше 20",
+              explanation: "Проверка диапазонов.",
+            },
+            {
+              code: "a = 5\nb = 10\nc = 15\nif a > b and a > c:\n    print(a)\nelif b > a and b > c:\n    print(b)\nelse:\n    print(c)",
+              answer: "15",
+              explanation: "Поиск максимального числа.",
+            },
+          ],
+        },
+        4: {
+          title: "Цикл for",
+          description: "Итерации по последовательностям",
+          image: "7.jpg",
+          theory: `*Уровень 4: Цикл for*\n\n🔹Базовый синтаксис:\n\`\`\`python
+      for переменная in последовательность:
+          действия\n\`\`\`\n\n🔹Функция range():\n\`\`\`python
+      for i in range(5):     # 0,1,2,3,4
+      for i in range(1,6):   # 1,2,3,4,5
+      for i in range(0,10,2): # 0,2,4,6,8\n\`\`\`\n\n🔹Итерация по строке:\n\`\`\`python
+      for char in 'Hello':
+          print(char)\n\`\`\`\n\n🔹Вложенные циклы:\n\`\`\`python
+      for i in range(3):
+          for j in range(2):
+              print(i, j)\n\`\`\``,
+          tasks: [
+            {
+              code: "for i in range(3):\n    print(i)",
+              answer: "0\n1\n2",
+              explanation: "Простой цикл по range.",
+            },
+            {
+              code: "for i in range(1, 4):\n    print(i * 2)",
+              answer: "2\n4\n6",
+              explanation: "Цикл с умножением.",
+            },
+            {
+              code: "for letter in 'abc':\n    print(letter * 2)",
+              answer: "aa\nbb\ncc",
+              explanation: "Итерация по строке.",
+            },
+            {
+              code: "total = 0\nfor num in [1, 2, 3, 4]:\n    total += num\nprint(total)",
+              answer: "10",
+              explanation: "Сумма элементов списка.",
+            },
+            {
+              code: "for i in range(3, 0, -1):\n    print(i)",
+              answer: "3\n2\n1",
+              explanation: "Обратный цикл.",
+            },
+            {
+              code: "word = ''\nfor ch in ['p', 'y', 't', 'h', 'o', 'n']:\n    word += ch\nprint(word)",
+              answer: "python",
+              explanation: "Сборка строки из списка.",
+            },
+            {
+              code: "count = 0\nfor i in range(10):\n    if i % 2 == 0:\n        count += 1\nprint(count)",
+              answer: "5",
+              explanation: "Подсчет четных чисел.",
+            },
+            {
+              code: "for i in range(2):\n    for j in range(2):\n        print(i, j)",
+              answer: "0 0\n0 1\n1 0\n1 1",
+              explanation: "Вложенные циклы.",
+            },
+            {
+              code: "result = 1\nfor i in range(1, 5):\n    result *= i\nprint(result)",
+              answer: "24",
+              explanation: "Факториал числа.",
+            },
+            {
+              code: "squares = []\nfor x in range(1, 4):\n    squares.append(x ** 2)\nprint(squares)",
+              answer: "[1, 4, 9]",
+              explanation: "Создание списка квадратов.",
+            },
+          ],
+        },
+        5: {
+          title: "Цикл while",
+          description: "Циклы с условием",
+          image: "8.jpg",
+          theory: `*Уровень 5: Цикл while*\n\n🔹Базовый синтаксис:\n\`\`\`python
+      while условие:
+          действия\n\`\`\`\n\n🔹Пример:\n\`\`\`python
+      count = 0
+      while count < 5:
+          print(count)
+          count += 1\n\`\`\`\n\n🔹Бесконечный цикл:\n\`\`\`python
+      while True:
+          print('Бесконечность')
+          break  # для остановки\n\`\`\`\n\n🔹Break и continue:\n\`\`\`python
+      while True:
+          answer = input('Введите stop: ')
+          if answer == 'stop':
+              break
+          if len(answer) < 3:
+              continue
+          print('Слишком коротко')\n\`\`\``,
+          tasks: [
+            {
+              code: "count = 0\nwhile count < 3:\n    print(count)\n    count += 1",
+              answer: "0\n1\n2",
+              explanation: "Простой цикл while.",
+            },
+            {
+              code: "num = 5\nwhile num > 0:\n    print(num)\n    num -= 1",
+              answer: "5\n4\n3\n2\n1",
+              explanation: "Обратный отсчет.",
+            },
+            {
+              code: "x = 1\nwhile x < 10:\n    x *= 2\nprint(x)",
+              answer: "16",
+              explanation: "Умножение в цикле.",
+            },
+            {
+              code: "total = 0\nn = 1\nwhile n <= 5:\n    total += n\n    n += 1\nprint(total)",
+              answer: "15",
+              explanation: "Сумма чисел.",
+            },
+            {
+              code: "password = ''\nwhile password != 'secret':\n    password = 'secret'\nprint('Доступ разрешен')",
+              answer: "Доступ разрешен",
+              explanation: "Проверка пароля.",
+            },
+            {
+              code: "i = 0\nwhile i < 5:\n    if i == 3:\n        break\n    print(i)\n    i += 1",
+              answer: "0\n1\n2",
+              explanation: "Досрочный выход из цикла.",
+            },
+            {
+              code: "n = 0\nwhile n < 5:\n    n += 1\n    if n % 2 == 0:\n        continue\n    print(n)",
+              answer: "1\n3\n5",
+              explanation: "Пропуск четных чисел.",
+            },
+            {
+              code: "x = 10\nwhile x > 0:\n    x -= 3\n    if x < 0:\n        x = 0\n    print(x)",
+              answer: "7\n4\n1\n0",
+              explanation: "Вычитание с проверкой.",
+            },
+            {
+              code: "a, b = 0, 1\nwhile a < 10:\n    print(a)\n    a, b = b, a + b",
+              answer: "0\n1\n1\n2\n3\n5\n8",
+              explanation: "Числа Фибоначчи.",
+            },
+            {
+              code: "num = 128\ncount = 0\nwhile num > 1:\n    num = num // 2\n    count += 1\nprint(count)",
+              answer: "7",
+              explanation: "Подсчет делений на 2.",
+            },
+          ],
+        },
+        6: {
+          title: "Вложенные циклы",
+          description: "Циклы внутри циклов",
+          image: "9.jpg",
+          theory: `*Уровень 6: Вложенные циклы*\n\n🔹Базовый пример:\n\`\`\`python
+      for i in range(3):
+          for j in range(2):
+              print(i, j)\n\`\`\`\n\n🔹Таблица умножения:\n\`\`\`python
+      for i in range(1, 4):
+          for j in range(1, 4):
+              print(f'{i}*{j}={i*j}')\n\`\`\`\n\n🔹Вложенные while:\n\`\`\`python
+      i = 1
+      while i <= 2:
+          j = 1
+          while j <= 3:
+              print(i, j)
+              j += 1
+          i += 1\n\`\`\`\n\n🔹Break во вложенных циклах:\n\`\`\`python
+      for i in range(3):
+          for j in range(3):
+              if j == 1:
+                  break
+              print(i, j)\n\`\`\``,
+          tasks: [
+            {
+              code: "for i in range(2):\n    for j in range(2):\n        print(i, j)",
+              answer: "0 0\n0 1\n1 0\n1 1",
+              explanation: "Простые вложенные циклы.",
+            },
+            {
+              code: "for i in range(1, 3):\n    for j in range(1, 3):\n        print(i * j)",
+              answer: "1\n2\n2\n4",
+              explanation: "Умножение в циклах.",
+            },
+            {
+              code: "for i in range(3):\n    for j in range(i):\n        print(j)",
+              answer: "0\n0\n1",
+              explanation: "Зависимый внутренний цикл.",
+            },
+            {
+              code: "for i in range(2):\n    j = 0\n    while j < 2:\n        print(i, j)\n        j += 1",
+              answer: "0 0\n0 1\n1 0\n1 1",
+              explanation: "For и while вместе.",
+            },
+            {
+              code: "for i in range(3):\n    for j in range(3):\n        if i == j:\n            break\n        print(i, j)",
+              answer: "1 0\n2 0\n2 1",
+              explanation: "Break во вложенном цикле.",
+            },
+            {
+              code: "for i in range(1, 4):\n    line = ''\n    for j in range(i):\n        line += '*' + ' '\n    print(line)",
+              answer: "* \n* * \n* * * ",
+              explanation: "Рисование треугольника.",
+            },
+            {
+              code: "count = 0\nfor i in range(3):\n    for j in range(3):\n        if (i + j) % 2 == 0:\n            count += 1\nprint(count)",
+              answer: "5",
+              explanation: "Подсчет пар с четной суммой.",
+            },
+            {
+              code: "result = []\nfor i in range(2):\n    inner = []\n    for j in range(3):\n        inner.append(j)\n    result.append(inner)\nprint(result)",
+              answer: "[[0, 1, 2], [0, 1, 2]]",
+              explanation: "Создание вложенных списков.",
+            },
+            {
+              code: "for i in range(5):\n    for j in range(5):\n        if i + j > 3:\n            print('*', end='')\n        else:\n            print('.', end='')\n    print()",
+              answer: ".....\n.....\n....*\n..***\n*****",
+              explanation: "Паттерн с условием.",
+            },
+            {
+              code: "sum = 0\nfor i in range(3):\n    for j in range(3):\n        for k in range(2):\n            sum += 1\nprint(sum)",
+              answer: "18",
+              explanation: "Тройной вложенный цикл.",
+            },
+          ],
+        },
+        7: {
+          title: "Строки",
+          description: "Индексация, срезы, методы",
+          image: "10.jpg",
+          theory: `*Уровень 7: Строки*\n\n🔹Индексация:\n\`\`\`python
+      s = 'Python'
+      print(s[0])  # 'P'
+      print(s[-1]) # 'n'\n\`\`\`\n\n🔹Срезы:\n\`\`\`python
+      print(s[1:4]) # 'yth'
+      print(s[:3])  # 'Pyt'
+      print(s[3:])  # 'hon'\n\`\`\`\n\n🔹Методы строк:\n\`\`\`python
+      print(s.upper())    # 'PYTHON'
+      print('HELLO'.lower()) # 'hello'
+      print('abc'.replace('b', 'x')) # 'axc'
+      print('a,b,c'.split(',')) # ['a', 'b', 'c']\n\`\`\`\n\n🔹Форматирование:\n\`\`\`python
+      name = 'Alice'
+      print(f'Hello, {name}!') # 'Hello, Alice!'\n\`\`\``,
+          tasks: [
+            {
+              code: "s = 'Python'\nprint(s[0])",
+              answer: "P",
+              explanation: "Первый символ строки.",
+            },
+            {
+              code: "s = 'Hello'\nprint(s[-1])",
+              answer: "o",
+              explanation: "Последний символ строки.",
+            },
+            {
+              code: "s = 'Programming'\nprint(s[3:7])",
+              answer: "gram",
+              explanation: "Срез строки.",
+            },
+            {
+              code: "s = 'Python'\nprint(s.upper())",
+              answer: "PYTHON",
+              explanation: "Преобразование в верхний регистр.",
+            },
+            {
+              code: "print('HELLO'.lower())",
+              answer: "hello",
+              explanation: "Преобразование в нижний регистр.",
+            },
+            {
+              code: "s = 'abc'\nprint(s.replace('b', 'x'))",
+              answer: "axc",
+              explanation: "Замена символа в строке.",
+            },
+            {
+              code: "print('a,b,c'.split(','))",
+              answer: "['a', 'b', 'c']",
+              explanation: "Разделение строки по разделителю.",
+            },
+            {
+              code: "name = 'Alice'\nage = 25\nprint(f'{name} is {age} years old')",
+              answer: "Alice is 25 years old",
+              explanation: "f-строки (форматирование).",
+            },
+            {
+              code: "s = ' hello '\nprint(s.strip())",
+              answer: "hello",
+              explanation: "Удаление пробелов с обеих сторон.",
+            },
+            {
+              code: "s = 'Python'\nprint(s[::-1])",
+              answer: "nohtyP",
+              explanation: "Разворот строки срезом.",
+            },
+          ],
+        },
+        8: {
+          title: "Списки",
+          description: "Работа с коллекциями",
+          image: "11.jpg",
+          theory: `*Уровень 8: Списки*\n\n🔹Создание списка:\n\`\`\`python
+      nums = [1, 2, 3]
+      words = ['hello', 'world']
+      mixed = [1, 'two', 3.0]\n\`\`\`\n\n🔹Операции со списками:\n\`\`\`python
+      nums.append(4)      # [1,2,3,4]
+      nums.insert(1, 5)   # [1,5,2,3,4]
+      nums.remove(2)      # [1,5,3,4]
+      nums.pop()          # [1,5,3]\n\`\`\`\n\n🔹Срезы списков:\n\`\`\`python
+      print(nums[1:3])    # [5,3]
+      print(nums[::-1])   # [3,5,1]\n\`\`\`\n\n🔹Списочные выражения:\n\`\`\`python
+      squares = [x**2 for x in range(5)] # [0,1,4,9,16]\n\`\`\``,
+          tasks: [
+            {
+              code: "nums = [1, 2, 3]\nprint(nums[1])",
+              answer: "2",
+              explanation: "Доступ к элементу списка.",
+            },
+            {
+              code: "nums = [1, 2, 3]\nnums.append(4)\nprint(nums)",
+              answer: "[1, 2, 3, 4]",
+              explanation: "Добавление элемента в конец.",
+            },
+            {
+              code: "nums = [1, 2, 3]\nnums.insert(1, 5)\nprint(nums)",
+              answer: "[1, 5, 2, 3]",
+              explanation: "Вставка элемента по индексу.",
+            },
+            {
+              code: "nums = [1, 2, 3, 2]\nnums.remove(2)\nprint(nums)",
+              answer: "[1, 3, 2]",
+              explanation: "Удаление первого вхождения.",
+            },
+            {
+              code: "nums = [1, 2, 3]\nprint(nums.pop())\nprint(nums)",
+              answer: "3\n[1, 2]",
+              explanation: "Удаление и возврат последнего элемента.",
+            },
+            {
+              code: "nums = [1, 2, 3, 4, 5]\nprint(nums[1:4])",
+              answer: "[2, 3, 4]",
+              explanation: "Срез списка.",
+            },
+            {
+              code: "nums = [1, 2, 3]\nprint(nums[::-1])",
+              answer: "[3, 2, 1]",
+              explanation: "Разворот списка срезом.",
+            },
+            {
+              code: "squares = [x**2 for x in range(4)]\nprint(squares)",
+              answer: "[0, 1, 4, 9]",
+              explanation: "Списочное выражение.",
+            },
+            {
+              code: "nums = [1, 2, 3]\nnums[1] = 5\nprint(nums)",
+              answer: "[1, 5, 3]",
+              explanation: "Изменение элемента списка.",
+            },
+            {
+              code: "a = [1, 2]\nb = [3, 4]\nprint(a + b)",
+              answer: "[1, 2, 3, 4]",
+              explanation: "Конкатенация списков.",
+            },
+          ],
+        },
+        9: {
+          title: "Функции",
+          description: "Создание и вызов функций",
+          image: "12.jpg",
+          theory: `*Уровень 9: Функции*\n\n🔹Определение функции:\n\`\`\`python
+      def greet(name):
+          return f'Hello, {name}!'\n\`\`\`\n\n🔹Вызов функции:\n\`\`\`python
+      print(greet('Alice')) # 'Hello, Alice!'\n\`\`\`\n\n🔹Параметры по умолчанию:\n\`\`\`python
+      def power(x, n=2):
+          return x ** n
+      print(power(3))   # 9
+      print(power(3,3)) # 27\n\`\`\`\n\n🔹Рекурсия:\n\`\`\`python
+      def factorial(n):
+          return 1 if n == 0 else n * factorial(n-1)
+      print(factorial(5)) # 120\n\`\`\``,
+          tasks: [
+            {
+              code: "def add(a, b):\n    return a + b\nprint(add(2, 3))",
+              answer: "5",
+              explanation: "Простая функция сложения.",
+            },
+            {
+              code: "def greet(name='Guest'):\n    return f'Hello, {name}!'\nprint(greet())",
+              answer: "Hello, Guest!",
+              explanation: "Параметр по умолчанию.",
+            },
+            {
+              code: "def square(x):\n    return x * x\nprint(square(4))",
+              answer: "16",
+              explanation: "Функция возведения в квадрат.",
+            },
+            {
+              code: "def is_even(n):\n    return n % 2 == 0\nprint(is_even(5))",
+              answer: "False",
+              explanation: "Проверка четности числа.",
+            },
+            {
+              code: "def max_num(a, b):\n    return a if a > b else b\nprint(max_num(7, 3))",
+              answer: "7",
+              explanation: "Функция поиска максимума.",
+            },
+            {
+              code: "def reverse(s):\n    return s[::-1]\nprint(reverse('Python'))",
+              answer: "nohtyP",
+              explanation: "Разворот строки в функции.",
+            },
+            {
+              code: "def factorial(n):\n    if n == 0:\n        return 1\n    return n * factorial(n-1)\nprint(factorial(4))",
+              answer: "24",
+              explanation: "Рекурсивный факториал.",
+            },
+            {
+              code: "def sum_list(nums):\n    total = 0\n    for num in nums:\n        total += num\n    return total\nprint(sum_list([1, 2, 3]))",
+              answer: "6",
+              explanation: "Сумма элементов списка.",
+            },
+            {
+              code: "def multiply(a, b=1):\n    return a * b\nprint(multiply(5))\nprint(multiply(5, 3))",
+              answer: "5\n15",
+              explanation: "Функция с параметром по умолчанию.",
+            },
+            {
+              code: "def count_vowels(s):\n    vowels = 'aeiou'\n    count = 0\n    for ch in s.lower():\n        if ch in vowels:\n            count += 1\n    return count\nprint(count_vowels('Hello World'))",
+              answer: "3",
+              explanation: "Подсчет гласных в строке.",
+            },
+          ],
+        },
+
+        10: {
+          title: "Пройти босса!",
+          description: "Все пройденные темы",
+          image: "13.jpg",
+          theory: "Босс-уровень!\n\nПроверь свои знания по всем темам.",
+          tasks: [
+            {
+              code: "x = 10\ny = 3\nprint(x // y, x % y)",
+              answer: "3 1",
+              explanation: "Арифметические операции",
+            },
+            {
+              code: "s = 'Python'\nprint(s[1] + s[-2:])",
+              answer: "yon",
+              explanation: "Индексация строк",
+            },
+            {
+              code: "nums = [1, 2, 3]\nnums.append(nums[0] * 2)\nprint(nums)",
+              answer: "[1, 2, 3, 2]",
+              explanation: "Работа со списками",
+            },
+            {
+              code: "for i in range(2, 5):\n    print(i * 2, end=' ')",
+              answer: "4 6 8",
+              explanation: "Цикл for с range",
+            },
+            {
+              code: "def greet(name):\n    return f'Hello, {name}!'\nprint(greet('Alice'))",
+              answer: "Hello, Alice!",
+              explanation: "Простые функции",
+            },
+            {
+              code: "x = 15\nif x % 2 == 0:\n    print('Even')\nelse:\n    print('Odd')\nprint('Done')",
+              answer: "Odd\nDone",
+              explanation: "Условия + вывод",
+            },
+            {
+              code: "s = 'hello'\nprint(s.upper()[1:4])",
+              answer: "ELL",
+              explanation: "Методы строк + срезы",
+            },
+            {
+              code: "count = 0\nwhile count < 3:\n    print(count * 2)\n    count += 1",
+              answer: "0\n2\n4",
+              explanation: "Цикл while",
+            },
+            {
+              code: "def max_num(a, b):\n    return a if a > b else b\nprint(max_num(7, max_num(3, 5)))",
+              answer: "7",
+              explanation: "Функции с условиями",
+            },
+            {
+              code: "words = ['apple', 'banana', 'cherry']\nprint([len(word) for word in words])",
+              answer: "[5, 6, 6]",
+              explanation: "Списковые выражения",
+            },
+            {
+              code: "s = 'abc123'\ndigits = 0\nfor ch in s:\n    if ch.isdigit():\n        digits += 1\nprint(digits)",
+              answer: "3",
+              explanation: "Цикл + строковые методы",
+            },
+            {
+              code: "def is_palindrome(s):\n    return s == s[::-1]\nprint(is_palindrome('racecar'))",
+              answer: "True",
+              explanation: "Функции + срезы строк",
+            },
+            {
+              code: "nums = [1, 5, 3, 8, 2]\nresult = 0\nfor num in nums:\n    if num > 4:\n        result += num\nprint(result)",
+              answer: "13",
+              explanation: "Цикл + условие + списки",
+            },
+            {
+              code: "def count_vowels(s):\n    vowels = 'aeiou'\n    return sum(1 for ch in s if ch in vowels)\nprint(count_vowels('Programming'))",
+              answer: "3",
+              explanation: "Функции + генераторы",
+            },
+            {
+              code: "x = 5\ny = 3\nz = 7\nif x > y and y < z:\n    print('Yes')\nif not x == z:\n    print('No')",
+              answer: "Yes\nNo",
+              explanation: "Сложные условия",
+            },
+            {
+              code: "def sum_even(numbers):\n    return sum(num for num in numbers if num % 2 == 0)\nprint(sum_even([1, 2, 3, 4, 5, 6]))",
+              answer: "12",
+              explanation: "Функции + генераторы + условия",
+            },
+            {
+              code: "s = 'HelloWorld'\nresult = ''\nfor i in range(len(s)):\n    if i % 2 == 0:\n        result += s[i].upper()\n    else:\n        result += s[i].lower()\nprint(result)",
+              answer: "HeLlOwOrLd",
+              explanation: "Цикл + строки + условия",
+            },
+            {
+              code: "def factorial(n):\n    result = 1\n    for i in range(1, n+1):\n        result *= i\n    return result\nprint(factorial(5))",
+              answer: "120",
+              explanation: "Функции + циклы",
+            },
+            {
+              code: "numbers = [3, 1, 4, 1, 5, 9]\nfor i in range(len(numbers)):\n    if numbers[i] == max(numbers):\n        print(f'Max at {i}')\n        break",
+              answer: "Max at 5",
+              explanation: "Цикл + списки + break",
+            },
+            {
+              code: "def process_string(s):\n    s = s.strip().lower()\n    return s if len(s) > 3 else s.upper()\nprint(process_string('  PyTHon  '))\nprint(process_string('hi'))",
+              answer: "python\nHI",
+              explanation: "Функции + строковые методы + условия",
+            },
+          ],
+        },
+      };
+
+      // Состояние пользователя
+      let userProgress =
+        JSON.parse(localStorage.getItem("pythonPathProgress")) || {};
+      let currentSection = null;
+      let currentTaskIndex = 0;
+      let attemptsLeft = 3;
+      let currentAnswer = "";
+
+      // Инициализация прогресса
+      function initProgress() {
+        for (const sectionId in sectionsData) {
+          if (!userProgress[sectionId]) {
+            userProgress[sectionId] = {
+              solved: 0,
+              total: sectionsData[sectionId].tasks.length, // Здесь будет актуальное количество
+              completedTasks: [],
+            };
+          } else {
+            // Обновляем total, если количество задач изменилось
+            userProgress[sectionId].total =
+              sectionsData[sectionId].tasks.length;
+          }
+        }
+        saveProgress();
+      }
+
+      // Сохранение прогресса
+      function saveProgress() {
+        localStorage.setItem(
+          "pythonPathProgress",
+          JSON.stringify(userProgress)
+        );
+      }
+
+      function loadSections() {
+        initProgress();
+
+        let html = '<div class="sections-grid">';
+
+        // Выводим основные разделы 1-9
+        for (let id = 1; id <= 9; id++) {
+          const section = sectionsData[id];
+          const progress = userProgress[id];
+          const progressText = `${progress.solved}/${
+            progress.total
+          } (${Math.round((progress.solved / progress.total) * 100)}%)`;
+
+          html += `
+              <div class="section-card" onclick="showSection('${id}')">
+                  <div class="image-container">
+                      <img src="images/${
+                        section.image
+                      }" class="section-image" alt="${section.title}">
+                  </div>
+                  <div class="section-content">
+                      <h3 class="section-title">${section.title.toUpperCase()}</h3>
+                      <p class="section-description">${section.description}</p>
+                      <div class="progress">Решено: ${progressText}</div>
+                      <button class="btn">СТАРТ</button>
+                      <div class="section-number">${id}</div>
+                  </div>
+              </div>
+          `;
+        }
+        // Добавляем босс-раздел (10) в конце по центру
+        const bossSection = sectionsData[10];
+        const bossProgress = userProgress[10];
+        const bossProgressText = `${bossProgress.solved}/${
+          bossProgress.total
+        } (${Math.round((bossProgress.solved / bossProgress.total) * 100)}%)`;
+
+        html += `
+          <div class="section-card" onclick="showSection('10')">
+              <div class="image-container">
+                  <img src="images/${
+                    bossSection.image
+                  }" class="section-image" alt="${bossSection.title}">
+              </div>
+              <div class="section-content">
+                  <h3 class="section-title">${bossSection.title.toUpperCase()}</h3>
+                  <p class="section-description">${bossSection.description}</p>
+                  <div class="progress">Решено: ${bossProgressText}</div>
+                  <button class="btn" style="background: var(--accent);">БОСС-БОЙ</button>
+                  <div class="section-number">10</div>
+              </div>
+          </div>
+      `;
+
+        html += "</div>";
+        document.getElementById("content").innerHTML = html;
+      }
+
+      // Показать раздел
+      function showSection(sectionId) {
+        currentSection = sectionId;
+        const section = sectionsData[sectionId];
+        const progress = userProgress[sectionId];
+
+        let html = `
+                  <div class="nav-buttons">
+                      <button class="btn" onclick="loadSections()">← НАЗАД К РАЗДЕЛАМ</button>
+                  </div>
+                  <div class="lesson-container">
+                      <h2 class="lesson-title">${section.title.toUpperCase()}</h2>
+                      <div class="progress">
+                          <div style="width: 100%; background: #3a3a4a; border-radius: 4px;">
+                              <div style="width: ${Math.round(
+                                (progress.solved / progress.total) * 100
+                              )}%; background: var(--secondary); height: 6px; border-radius: 4px;"></div>
+                          </div>
+                          Решено: ${progress.solved}/${
+          progress.total
+        } (${Math.round((progress.solved / progress.total) * 100)}%)
+                      </div>
+                      <div class="lesson-content">
+                          ${formatTheory(section.theory)}
+                      </div>
+                      <button class="btn btn-next" onclick="startTasks('${sectionId}')">
+                          НАЧАТЬ ЗАДАЧИ →
+                      </button>
+                  </div>
+                  `;
+
+        document.getElementById("content").innerHTML = html;
+      }
+
+      // Форматирование теории
+      function formatTheory(text) {
+        // Заменяем **текст** на <strong>текст</strong>
+        text = text.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
+
+        // Обрабатываем блоки кода с ```python
+        text = text.replace(
+          /```python\n([\s\S]*?)```/g,
+          function (match, code) {
+            // Удаляем лишние пробелы в начале каждой строки кода
+            // Удаление общих отступов у всех строк кода
+            code = code.replace(/^\s*\n|\n\s*$/g, ""); // убираем пустые строки в начале и в конце
+            const lines = code.split("\n");
+            const minIndent = Math.min(
+              ...lines
+                .filter((l) => l.trim())
+                .map((l) => l.match(/^ */)[0].length)
+            );
+            code = lines
+              .map((l) => l.slice(minIndent).replace(/ /g, "&nbsp;"))
+              .join("<br>");
+            return `<pre><code class="python">${code.trim()}</code></pre>`;
+          }
+        );
+
+        // Обрабатываем обычные переносы строк
+        text = text.replace(/\n/g, "<br>");
+
+        // Обрабатываем маркированные списки
+        text = text.replace(/🔹 (.*?)(<br>|$)/g, "<li>$1</li>");
+        text = text.replace(
+          /<li>(.*?)<\/li>/g,
+          '<li><span class="bullet">•</span>$1</li>'
+        );
+
+        // Оборачиваем списки в <ul>
+        text = text.replace(/(<li>.*?<\/li>)+/g, function (match) {
+          return `<ul>${match}</ul>`;
+        });
+
+        // Обрабатываем заголовки уровней
+        text = text.replace(
+          /\*Уровень (\d+): (.*?)\*/g,
+          "<h3>Уровень $1: $2</h3>"
+        );
+
+        return text;
+      }
+
+      // Начать задачи
+      function startTasks(sectionId) {
+        currentSection = sectionId;
+        currentTaskIndex = 0;
+        attemptsLeft = 3;
+        currentAnswer = "";
+        showTask();
+      }
+
+      // Показать задачу
+      function showTask() {
+        const task = sectionsData[currentSection].tasks[currentTaskIndex];
+        const progress = userProgress[currentSection];
+        const isCompleted = progress.completedTasks.includes(currentTaskIndex);
+
+        let html = `
+                  <div class="nav-buttons">
+                      <button class="btn" onclick="showSection('${currentSection}')">← ТЕОРИЯ</button>
+                      ${
+                        currentTaskIndex > 0
+                          ? `<button class="btn btn-secondary" onclick="prevTask()">← ПРЕДЫДУЩАЯ</button>`
+                          : ""
+                      }
+                  </div>
+                  <div class="task">
+                      <div class="task-header">
+                          <h3 class="task-title">ЗАДАЧА ${
+                            currentTaskIndex + 1
+                          }/${sectionsData[currentSection].tasks.length}</h3>
+                          <div class="progress">Решено: ${progress.solved}/${
+          progress.total
+        }</div>
+                      </div>
+                      ${
+                        isCompleted
+                          ? '<div style="color: var(--secondary); font-size: 10px; margin-bottom: 10px;">✓ Вы уже решили эту задачу</div>'
+                          : ""
+                      }
+                      <div class="crystals" title="Попытки: ${attemptsLeft}/3">
+                          ${Array(3)
+                            .fill()
+                            .map(
+                              (_, i) =>
+                                `<div class="crystal ${
+                                  i >= attemptsLeft ? "lost" : ""
+                                }" style="background-position: -${
+                                  i * 16
+                                }px 0"></div>`
+                            )
+                            .join("")}
+                      </div>
+                      <div class="task-question">Что выведет этот код?</div>
+                      <div class="task-code">
+                          <pre>${task.code}</pre>
+                      </div>
+                      <input type="text" class="answer-input" id="user-answer" placeholder="Введите ответ" value="${currentAnswer}"onclick="this.focus()">
+                      <button class="btn btn-check" onclick="checkAnswer()">ОТВЕТИТЬ</button>
+                      <div class="answer-result" id="answer-result">
+              </div>
+                  `;
+
+        document.getElementById("content").innerHTML = html;
+
+        // Обработчик клика для скрытия клавиатуры
+        const handleDocumentClick = (e) => {
+          const input = document.getElementById("user-answer");
+          if (input && e.target !== input) {
+            input.blur(); // Закрывает клавиатуру
+          }
+        };
+
+        // Удаляем старый обработчик (если был) и добавляем новый
+        document.removeEventListener("click", handleDocumentClick); // Важно!
+        document.addEventListener("click", handleDocumentClick);
+      }
+
+      // Предыдущая задача
+      function prevTask() {
+        if (currentTaskIndex > 0) {
+          currentTaskIndex--;
+          attemptsLeft = 3;
+          currentAnswer = "";
+          showTask();
+        }
+      }
+
+      function checkAnswerOnEnter(event) {
+        const input = document.getElementById("user-answer");
+        currentAnswer = input.value.trim();
+
+        if (event.key === "Enter") {
+          event.preventDefault();
+          input.blur(); // Добавили закрытие клавиатуры
+          checkAnswer();
+        }
+      }
+
+      // Проверить ответ
+      function checkAnswer() {
+        const task = sectionsData[currentSection].tasks[currentTaskIndex];
+        const userAnswer = document.getElementById("user-answer").value.trim();
+        const resultDiv = document.getElementById("answer-result");
+        const progress = userProgress[currentSection];
+
+        if (!userAnswer) {
+          resultDiv.innerHTML = `
+                  <div style="background:#3a3a4a; padding:10px; border:2px solid var(--accent)">
+                    Пожалуйста, введите ответ!
+                  </div>
+                `;
+          resultDiv.style.display = "block";
+          return;
+        }
+
+        const normalizedUserAnswer = userAnswer.replace(/\s+/g, " ");
+        const normalizedCorrectAnswer = task.answer.replace(/\s+/g, " ");
+
+        const isCorrect = normalizedUserAnswer === normalizedCorrectAnswer;
+
+        if (!isCorrect) {
+          attemptsLeft--;
+
+          if (attemptsLeft > 0) {
+            resultDiv.innerHTML = `
+                              <div style="background:#3a3a4a; padding:10px; border:2px solid var(--accent)">
+                                  <strong>Неправильно!</strong> Осталось попыток: ${attemptsLeft}
+                              </div>
+                          `;
+            resultDiv.style.display = "block";
+
+            // Обновляем кристаллы
+            const crystals = document.querySelectorAll(".crystal");
+            crystals.forEach((crystal, i) => {
+              if (i >= attemptsLeft) {
+                crystal.classList.add("lost");
+              }
+            });
+
+            return;
+          }
+        }
+
+        // Если ответ правильный или закончились попытки
+        if (isCorrect && !progress.completedTasks.includes(currentTaskIndex)) {
+          // Обновляем прогресс только если задача еще не была решена
+          progress.solved++;
+          progress.completedTasks.push(currentTaskIndex);
+          saveProgress();
+        }
+
+        resultDiv.innerHTML = `
+                      <div style="background:#3a3a4a; padding:10px; border:2px solid ${
+                        isCorrect ? "var(--secondary)" : "var(--accent)"
+                      }">
+                          <strong>${
+                            isCorrect ? "Правильно!" : "Попытки закончились"
+                          }</strong><br>
+                          <strong>Ваш ответ:</strong> ${userAnswer || "—"}<br>
+                          <strong>Правильный ответ:</strong> ${task.answer}<br>
+                          ${
+                            task.explanation
+                              ? `<em>${task.explanation}</em>`
+                              : ""
+                          }
+                      </div>
+                      <div style="display: flex; gap: 10px; margin-top: 10px;">
+                          ${
+                            currentTaskIndex > 0
+                              ? '<button class="btn btn-secondary" onclick="prevTask()">← ПРЕДЫДУЩАЯ</button>'
+                              : ""
+                          }
+                          <button class="btn btn-next" onclick="nextTask()">
+                              ${
+                                currentTaskIndex <
+                                sectionsData[currentSection].tasks.length - 1
+                                  ? "СЛЕДУЮЩАЯ →"
+                                  : "ЗАВЕРШИТЬ"
+                              }
+                          </button>
+                      </div>
+                  `;
+
+        resultDiv.style.display = "block";
+      }
+
+      // Следующая задача
+      function nextTask() {
+        if (currentTaskIndex < sectionsData[currentSection].tasks.length - 1) {
+          currentTaskIndex++;
+          attemptsLeft = 3;
+          currentAnswer = "";
+          showTask();
+        } else {
+          showSectionCompleteScreen();
+        }
+      }
+
+      function showSectionCompleteScreen() {
+        const sectionNumber = parseInt(currentSection);
+        const nextSection = sectionNumber < 10 ? sectionNumber + 1 : null;
+        const prevSection = sectionNumber > 1 ? sectionNumber - 1 : null;
+
+        const progress = userProgress[currentSection];
+        const completionPercent = Math.round(
+          (progress.solved / progress.total) * 100
+        );
+        const isBossSection = sectionNumber === 10;
+        const isWin = completionPercent >= 70;
+
+        // Определяем какая картинка показывать
+        let imageName;
+        if (isWin) {
+          imageName = 13 + sectionNumber + ".jpg";
+        } else {
+          if (sectionNumber == 10) {
+            imageName = "lose_boss.jpg";
+          } else {
+            imageName = "lose.jpg";
+          }
+        }
+
+        const html = `
+          <div class="nav-buttons">
+            <button class="btn" onclick="showSection('${currentSection}')">← К РАЗДЕЛУ</button>
+          </div>
+          <div class="${
+            isBossSection ? "boss-completion" : "lesson-container"
+          } completion-screen">
+            <h2 class="lesson-title">
+              ${
+                isBossSection
+                  ? isWin
+                    ? "БОСС ПОБЕЖДЁН!"
+                    : "ВЫ ПРОИГРАЛИ БОССУ"
+                  : isWin
+                  ? `РАЗДЕЛ ${sectionNumber} ПРОЙДЕН!`
+                  : "РАЗДЕЛ НЕ ПРОЙДЕН"
+              }
+            </h2>
+            <div class="image-container">
+              <img src="images/${imageName}" class="section-image completion-image">
+            </div>
+            <div class="progress" style="margin: 20px 0; font-size: 14px;">
+              Результат: ${completionPercent}%
+            </div>
+            <div style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-top: 20px;">
+              ${
+                prevSection
+                  ? `<button class="btn btn-secondary" onclick="showSection('${prevSection}')">← РАЗДЕЛ ${prevSection}</button>`
+                  : ""
+              }
+              <button class="btn" onclick="loadSections()">К СПИСКУ РАЗДЕЛОВ</button>
+              ${
+                !isBossSection && nextSection
+                  ? `<button class="btn btn-next" onclick="showSection('${nextSection}')">РАЗДЕЛ ${nextSection} →</button>`
+                  : ""
+              }
+              ${
+                !isWin || isBossSection
+                  ? `<button class="btn" style="background: var(--accent);" onclick="startTasks('${currentSection}')">ПРОЙТИ ЗАНОВО</button>`
+                  : ""
+              }
+            </div>
+          </div>
+        `;
+
+        document.getElementById("content").innerHTML = html;
+      }
+
+      // Инициализация
+      document.addEventListener("DOMContentLoaded", loadSections);
+
+      // Глобальные функции для вызова из HTML
+      window.loadSections = loadSections;
+      window.showSection = showSection;
+      window.startTasks = startTasks;
+      window.prevTask = prevTask;
+      window.nextTask = nextTask;
+      window.checkAnswer = checkAnswer;
+      window.checkAnswerOnEnter = checkAnswerOnEnter;
+    </script>
+  </body>
+</html>
