@@ -450,6 +450,23 @@
         flex-wrap: wrap; /* Перенос на новую строку при нехватке места */
       }
 
+      .completion-screen .btn {
+        transition: all 0.3s;
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
       @media (max-width: 768px) {
         body {
           padding: 10px;
@@ -1349,7 +1366,7 @@
           ],
         },
         11: {
-          title: "Помочь Пайтику стать лучше!",
+          title: "Помочь Пайтику стать еще лучше!",
           description: "Освой Python на максимум для ЕГЭ",
           image: "last_lvl_artem.jpg",
           theory: "Индивидуальные занятия с опытным преподавателем",
@@ -1459,7 +1476,6 @@
                   <h3 class="section-title">${artemSection.title.toUpperCase()}</h3>
                   <p class="section-description">${artemSection.description}</p>
                   <button class="btn" style="background: var(--accent);color: white;">ЗНАНИЯ!</button>
-                  <div class="section-number">11</div>
               </div>
           </div>
         `;
@@ -1495,7 +1511,7 @@
                   <ul style="list-style: none; padding: 0; margin: 0 0 30px 0; text-align: left; display: inline-block;">
                       <li style="margin-bottom: 15px; padding-left: 30px; position: relative; font-size: 14px;">
                           <span style="position: absolute; left: 0; color: var(--primary);"></span>
-                          ✔️ Разблокируй сложные темы (🔍+5 к пониманию)
+                          ✔️ Разблокируй сложные темы   (🔍+5 к пониманию)
                       </li>
                       <li style="margin-bottom: 15px; padding-left: 30px; position: relative; font-size: 14px;">
                           <span style="position: absolute; left: 0; color: var(--primary);"></span>
@@ -1869,6 +1885,13 @@
               ${
                 !isWin || isBossSection
                   ? `<button class="btn" style="background: var(--accent);" onclick="startTasks('${currentSection}')">ПРОЙТИ ЗАНОВО</button>`
+                  : ""
+              }
+              ${
+                isBossSection && isWin
+                  ? `<button class="btn" style="background: var(--secondary); animation: pulse 2s infinite;" onclick="showArtemSection()">
+                      СТАТЬ ЕЩЁ ЛУЧШЕ! ▶
+                    </button>`
                   : ""
               }
             </div>
