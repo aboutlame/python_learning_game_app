@@ -1,7 +1,7 @@
 import telebot
 from telebot import types
 
-TOKEN = "7902109259:AAHkRGPFIkxrRrsph59QopPbXvJWDKVcigU"
+TOKEN = "BOT"
 bot = telebot.TeleBot(TOKEN)
 WEB_APP_URL = "https://aboutlame.github.io/python_learning_game_app/"
 
